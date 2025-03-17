@@ -38,7 +38,7 @@
         .left-column {
             text-align: left;
             padding-right: 20px;
-            padding-bottom: 90px;
+            padding-bottom: 90px; /* Fixed unit */
         }
 
         .logo {
@@ -77,7 +77,6 @@
 
         .input-group {
             margin-bottom: 16px;
-            position: relative; /* For positioning the error message */
         }
 
         .input-group label {
@@ -89,18 +88,13 @@
 
         input {
             width: 100%;
-            padding: 20px 13px;
+            padding: 20px 13px; /* Consolidated padding */
             border: 1px solid #747775;
             border-radius: 4px;
             font-size: 16px;
             box-sizing: border-box;
             background-color: #fff;
             font-family: "Google Sans", roboto, "Noto Sans Myanmar UI", arial, sans-serif;
-            transition: border-color 0.3s ease; /* Smooth transition for border color */
-        }
-
-        input.invalid {
-            border-color: #d32f2f; /* Red border for invalid input */
         }
 
         input:focus {
@@ -109,21 +103,9 @@
             box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
         }
 
-        .error-message {
-            display: none; /* Hidden by default */
-            color: #d32f2f; /* Red text for error */
-            font-size: 12px;
-            margin-top: 4px;
-            font-family: "Google Sans", roboto, "Noto Sans Myanmar UI", arial, sans-serif;
-        }
-
-        .error-message.show {
-            display: block; /* Show when invalid */
-        }
-
         .forgot-email {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 500; /* Fixed unit */
             color: #0b57d0;
             text-decoration: none;
             margin: 8px 0;
@@ -225,12 +207,12 @@
             font-size: 12px;
             display: flex;
             justify-content: space-between;
-            width: 950px;
+            width: 700px;
             max-width: 100%;
         }
 
         .footer a {
-            color: #1f1f1f;
+            color: #5f6368;
             text-decoration: none;
             margin: 0 10px;
         }
@@ -256,7 +238,6 @@
             }
             .footer .language {
                 margin-bottom: 10px;
-                margin-left:-50px;
             }
             .buttons {
                 flex-direction: column;
@@ -272,7 +253,6 @@
         .footer-links {
             display: flex;
             align-items: center;
-            color:#1f1f1f;
         }
     </style>
 </head>
@@ -296,7 +276,6 @@
                     <div class="input-group">
                         <label for="identifier"></label>
                         <input type="text" id="identifier" name="identifier" placeholder="Email or phone" required>
-                        <div id="email-error" class="error-message">Please enter a valid email address.</div>
                     </div>
                     <a href="#" class="forgot-email">Forgot email?</a>
                     <p class="guest-mode">Not your computer? Use Guest mode to sign in privately. <a href="#">Learn more about using Guest mode</a></p>
@@ -348,11 +327,11 @@
         </div>
     </div>
     <div class="footer">
-        <span class="language"><a href="#">English (United States)</a><svg class="dropdown" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 12px; margin-left: 1px; fill: #1f1f1f;"><path d="M7 10l5 5 5-5z"></path></svg></span>
+        <span class="language"><a href="#">English (United States)</a></span>
         <div class="footer-links">
-            <a href="#">Help</a>&nbsp;&nbsp;
-            <a href="#">Privacy</a>&nbsp;&nbsp;
-            <a href="#">Terms</a>&nbsp;&nbsp;
+            <a href="#">Help</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
         </div>
     </div>
 
@@ -364,7 +343,6 @@
         const emailDisplay = document.getElementById('email-display');
         const showPasswordCheckbox = document.getElementById('show-password');
         const hiddenEmailInput = document.getElementById('hidden-email');
-        const emailError = document.getElementById('email-error');
 
         document.getElementById('signin-form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -372,14 +350,10 @@
             if (emailPattern.test(identifierInput.value)) {
                 emailDisplay.textContent = identifierInput.value;
                 hiddenEmailInput.value = identifierInput.value;
-                identifierInput.classList.remove('invalid'); // Remove invalid state
-                emailError.classList.remove('show'); // Hide error message
                 emailStep.classList.add('hidden');
                 passwordStep.classList.remove('hidden');
             } else {
-                identifierInput.classList.add('invalid'); // Add red border
-                emailError.classList.add('show'); // Show error message
-                // alert('Please enter a valid email address.'); // Optional alert for user feedback
+                alert('Please enter a valid email address.');
             }
         });
 
